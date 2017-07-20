@@ -6,13 +6,15 @@ package com.theironyard;
 public class ReversePolishCalc {
 
     // You'll need a variable here to keep track of the top of the stack
-    int topOfStack = 0;
+    private int topOfStack = -1;
 
     // The array of the input string split up
     private String[] tokens;
 
     // The stack
     private String[] stack;
+
+//    private String[] OPERATORS = new String[]{"+", "-", "*", "/"};
 
     public double calculate(String input) {
 
@@ -23,9 +25,24 @@ public class ReversePolishCalc {
         stack =  new String[tokens.length];
 
         // 3. write the algorithm
-        for(int i = 0; i < tokens.length; ++i) {
+        for (int i = 0; i < tokens.length; i++) {
             // calls to push() and pop() and do the math here
-
+            String token = tokens[i];
+            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
+                double secondOperand = pop();
+                double firstOperand = pop();
+                if (token.equals("+")) {
+                    push(firstOperand + secondOperand);
+                } else if (token.equals("-")) {
+                    push(firstOperand - secondOperand);
+                } else if (token.equals("*")) {
+                    push(firstOperand * secondOperand);
+                } else if (token.equals("/")) {
+                    push(firstOperand / secondOperand);
+                }
+            } else {
+                push(token);
+            }
         }
 
         // 4. return the result
@@ -34,7 +51,9 @@ public class ReversePolishCalc {
 
     private void push(String number) {
         // push on the stack
+        topOfStack++;
         stack[topOfStack] = number;
+        System.out.println(stack[topOfStack]);
     }
 
     private void push(double d) {
@@ -45,9 +64,11 @@ public class ReversePolishCalc {
 
     private double pop() {
         // remove the string from the top of the stack and convert it to a double and return it
-        String popString = stack[topOfStack];
+        double popString = Double.parseDouble(stack[topOfStack]);
         stack[topOfStack] = null;
-        double popDouble = Double.parseDouble(popString);
-        return popDouble;
+        if (topOfStack != 0) {
+            topOfStack--;
+        }
+        return popString;
     }
 }
