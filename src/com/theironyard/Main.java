@@ -19,6 +19,20 @@ public class Main {
         checkResult(rpnExpression, expectedResult, actualResult);
 
         // Write tests for the other operators (-, *, /)
+        rpnExpression = "18.1,4.8,-";
+        expectedResult = 13.3;
+        actualResult = rpc.calculate(rpnExpression);
+        checkResult(rpnExpression, expectedResult, actualResult);
+
+        rpnExpression = "3.7,5.2,*";
+        expectedResult = 19.24;
+        actualResult = rpc.calculate(rpnExpression);
+        checkResult(rpnExpression, expectedResult, actualResult);
+
+        rpnExpression = "21.0,0.75,/";
+        expectedResult = 28.0;
+        actualResult = rpc.calculate(rpnExpression);
+        checkResult(rpnExpression, expectedResult, actualResult);
 
         // Uncomment this test which has many operators
 //        rpnExpression = "5,1,2,+,4,*,+,3,-";
