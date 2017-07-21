@@ -53,7 +53,6 @@ public class ReversePolishCalc {
         // push on the stack
         topOfStack++;
         stack[topOfStack] = number;
-        System.out.println(stack[topOfStack]);
     }
 
     private void push(double d) {
